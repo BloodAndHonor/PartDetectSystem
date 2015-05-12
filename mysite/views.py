@@ -26,18 +26,18 @@ def setspan(request,sy,sm,sd,sh,smin,ssec,ty,tm,td,th,tmin,tsec):
     sdate.save()
     tdate.save()
 
-def tst(request):
+def upload(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             newdoc = Pic(docfile=request.FILES['docfile'])
             newdoc.save()
-            return HttpResponseRedirect(reverse('mysite.views.tst'))
+            return HttpResponseRedirect(reverse('mysite.views.upload'))
     else:
         form = DocumentForm()
         documents=Pic.objects.all()
         return render_to_response(
-            'mysite/tst.html',
+            'mysite/upload.html',
             {'form':form,'documents':documents},
             context_instance=RequestContext(request)
         )
