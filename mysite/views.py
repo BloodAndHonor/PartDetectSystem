@@ -30,12 +30,12 @@ def tst(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
-            newdoc = Document(docfile=request.FILES['docfile'])
+            newdoc = Pic(docfile=request.FILES['docfile'])
             newdoc.save()
             return HttpResponseRedirect(reverse('mysite.views.tst'))
     else:
         form = DocumentForm()
-        documents=Document.objects.all()
+        documents=Pic.objects.all()
         return render_to_response(
             'mysite/tst.html',
             {'form':form,'documents':documents},
