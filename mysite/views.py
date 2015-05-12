@@ -9,8 +9,7 @@ from django.template import RequestContext, loader
 from django.forms import ModelForm
 from django.core.context_processors import csrf
 import random
-from mysite.models import Document
-from mysite.forms import DocumentForm
+from mysite.forms import DocumentForm,RegForm,LoginForm
 from mysite.models import User_Pic_Rel,User,Pic,DtVar
 # Create your views here.
 from datetime import datetime
@@ -32,12 +31,45 @@ def upload(request):
         if form.is_valid():
             newdoc = Pic(docfile=request.FILES['docfile'])
             newdoc.save()
-            return HttpResponseRedirect(reverse('mysite.views.upload'))
-    else:
-        form = DocumentForm()
-        documents=Pic.objects.all()
-        return render_to_response(
-            'mysite/upload.html',
-            {'form':form,'documents':documents},
-            context_instance=RequestContext(request)
-        )
+            return HttpResponseRedirect(reverse('mysite:upload'))
+    form = DocumentForm()
+    documents=Pic.objects.all()
+    return render_to_response(
+        'mysite/upload.html',
+        {'form':form,'documents':documents},
+        context_instance=RequestContext(request)
+    )
+def reg(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        form = RegForm(request.POST)
+        if form.is_valid():
+            qry_usrs = User.objects.all().filter(username=username)
+            if len(qry_usrs) != 0:
+                return HttpResponse('用户已存在！')
+            newusr = User(username=request.POST['username'],password=request.POST['password'])
+            newusr.save()
+            return HttpResponseRedirect(reverse('mysite:reg'))    
+    form = RegForm()
+    usrs=User.objects.all()
+    c={
+        'form':form,
+        'usrs':usrs,
+    }
+    return render_to_response('mysite/reg.html',c,context_instance=RequestContext(request))
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            qry_usrs = User.objects.all().filter(username=username).filter(password=password)
+            if len(qry_usrs) == 1:
+                return HttpResponse('登录成功')
+    form = LoginForm()
+    c= {
+        'form':form,
+    }
+    return render_to_response('mysite/login.html',c,context_instance=RequestContext(request))

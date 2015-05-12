@@ -1,0 +1,17 @@
+    {% if usrs %}
+        <ul>
+        {% for usr in usrs %}
+            <li>{{ usr.username }} &nbsp;&nbsp;&nbsp;&nbsp;{{ usr.password }} </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No usrs.</p>
+    {% endif %}
+
+        <form action="{% url 'mysite:reg' %}" method="post" >
+            {% csrf_token %}
+          
+                {{ form }}
+            </p>
+            <p><input type="submit" value="注册" /></p>
+        </form>
