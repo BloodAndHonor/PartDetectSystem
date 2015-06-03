@@ -17,13 +17,15 @@ def init(request):
    DtVar.objects.all().delete()
    DtVar(name='sdate',val=datetime.now()).save()
    DtVar(name='tdate',val=datetime.now()).save()
+   return HttpResponse('OK!')
 def setspan(request,sy,sm,sd,sh,smin,ssec,ty,tm,td,th,tmin,tsec):
     sdate = get_object_or_404(DtVar,name='sdate')
     tdate = get_object_or_404(DtVar,name='tdate')
-    sdate.val=datetime(sy,sm,sd,sh,smin,ssec,0)
-    tdate.val=datetime(ty,tm,td,th,tmin,tsec,0)
+    sdate.val=datetime(int(sy),int(sm),int(sd),int(sh),int(smin),int(ssec),0)
+    tdate.val=datetime(int(ty),int(tm),int(td),int(th),int(tmin),int(tsec),0)
     sdate.save()
     tdate.save()
+    return HttpResponse('ok!')
 
 def upload(request):
     if request.method == 'POST':
