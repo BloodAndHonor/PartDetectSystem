@@ -28,8 +28,8 @@ class User(models.Model):
 
 class User_Pic_Rel (models.Model):
     id = models.AutoField(primary_key=True)
-    picid = models.ForeignKey(Pic)
-    uid = models.ForeignKey(User)
+    pic = models.ForeignKey(Pic)
+    usr = models.ForeignKey(User)
     unqualified = models.BooleanField(default=True)
 
 class DtVar(models.Model):

@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Minimal Django File Upload Example</title>   
-    </head>
-    <body>
-    <!-- List of uploaded documents -->
+{% load static %}
+{% include 'mysite/header.html' %}
     {% if documents %}
         <ul>
         {% for document in documents %}
@@ -24,5 +18,3 @@
             </p>
             <p><input type="submit" value="Upload" /></p>
         </form>
-    </body>
-</html> 
