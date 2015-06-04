@@ -1,0 +1,134 @@
+*** Starting uWSGI 2.0.10 (64bit) on [Thu Jun  4 23:02:46 2015] ***
+compiled with version: 4.8.2 on 04 June 2015 22:39:30
+os: Linux-3.16.0-30-generic #40~14.04.1-Ubuntu SMP Thu Jan 15 17:43:14 UTC 2015
+nodename: adminpub-0C
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 12
+current working directory: /var/www/PartDetectSystem
+writing pidfile to /var/www/PartDetectSystem/project-master.pid
+detected binary path: /usr/local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /var/www/PartDetectSystem
+your processes number limit is 31234
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address 127.0.0.1:8001 fd 3
+Python version: 2.7.6 (default, Mar 22 2014, 23:03:41)  [GCC 4.8.2]
+Python main interpreter initialized at 0x96d6c0
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 3710760 bytes (3623 KB) for 50 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x96d6c0 pid: 10103 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 10103)
+spawned uWSGI worker 1 (pid: 10106, cores: 1)
+spawned uWSGI worker 2 (pid: 10107, cores: 1)
+spawned uWSGI worker 3 (pid: 10108, cores: 1)
+spawned uWSGI worker 4 (pid: 10109, cores: 1)
+spawned uWSGI worker 5 (pid: 10110, cores: 1)
+spawned uWSGI worker 6 (pid: 10111, cores: 1)
+spawned uWSGI worker 7 (pid: 10112, cores: 1)
+spawned uWSGI worker 8 (pid: 10113, cores: 1)
+spawned uWSGI worker 9 (pid: 10114, cores: 1)
+spawned uWSGI worker 10 (pid: 10115, cores: 1)
+spawned uWSGI worker 11 (pid: 10116, cores: 1)
+spawned uWSGI worker 12 (pid: 10117, cores: 1)
+spawned uWSGI worker 13 (pid: 10118, cores: 1)
+spawned uWSGI worker 14 (pid: 10119, cores: 1)
+spawned uWSGI worker 15 (pid: 10120, cores: 1)
+spawned uWSGI worker 16 (pid: 10121, cores: 1)
+spawned uWSGI worker 17 (pid: 10122, cores: 1)
+spawned uWSGI worker 18 (pid: 10123, cores: 1)
+spawned uWSGI worker 19 (pid: 10124, cores: 1)
+spawned uWSGI worker 20 (pid: 10125, cores: 1)
+spawned uWSGI worker 21 (pid: 10126, cores: 1)
+spawned uWSGI worker 22 (pid: 10127, cores: 1)
+spawned uWSGI worker 23 (pid: 10128, cores: 1)
+spawned uWSGI worker 24 (pid: 10129, cores: 1)
+spawned uWSGI worker 25 (pid: 10130, cores: 1)
+spawned uWSGI worker 26 (pid: 10131, cores: 1)
+spawned uWSGI worker 27 (pid: 10132, cores: 1)
+spawned uWSGI worker 28 (pid: 10133, cores: 1)
+spawned uWSGI worker 29 (pid: 10134, cores: 1)
+spawned uWSGI worker 30 (pid: 10135, cores: 1)
+spawned uWSGI worker 31 (pid: 10136, cores: 1)
+spawned uWSGI worker 32 (pid: 10137, cores: 1)
+spawned uWSGI worker 33 (pid: 10138, cores: 1)
+spawned uWSGI worker 34 (pid: 10139, cores: 1)
+spawned uWSGI worker 35 (pid: 10140, cores: 1)
+spawned uWSGI worker 36 (pid: 10141, cores: 1)
+spawned uWSGI worker 37 (pid: 10142, cores: 1)
+spawned uWSGI worker 38 (pid: 10143, cores: 1)
+spawned uWSGI worker 39 (pid: 10144, cores: 1)
+spawned uWSGI worker 40 (pid: 10145, cores: 1)
+spawned uWSGI worker 41 (pid: 10146, cores: 1)
+spawned uWSGI worker 42 (pid: 10147, cores: 1)
+spawned uWSGI worker 43 (pid: 10148, cores: 1)
+spawned uWSGI worker 44 (pid: 10149, cores: 1)
+spawned uWSGI worker 45 (pid: 10150, cores: 1)
+spawned uWSGI worker 46 (pid: 10151, cores: 1)
+spawned uWSGI worker 47 (pid: 10152, cores: 1)
+spawned uWSGI worker 48 (pid: 10153, cores: 1)
+spawned uWSGI worker 49 (pid: 10154, cores: 1)
+spawned uWSGI worker 50 (pid: 10155, cores: 1)
+[pid: 10154|app: 0|req: 1/1] 192.168.1.114 () {38 vars in 621 bytes} [Thu Jun  4 23:03:01 2015] GET / => generated 3177 bytes in 20 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[pid: 10150|app: 0|req: 1/2] 192.168.1.114 () {40 vars in 609 bytes} [Thu Jun  4 23:03:01 2015] GET /favicon.ico => generated 3210 bytes in 17 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[pid: 10150|app: 0|req: 2/3] 192.168.1.114 () {38 vars in 633 bytes} [Thu Jun  4 23:03:12 2015] GET /upload => generated 171744 bytes in 151 msecs (HTTP/1.1 500) 2 headers in 92 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+worker 6 buried after 1 seconds
+worker 7 buried after 1 seconds
+worker 8 buried after 1 seconds
+worker 9 buried after 1 seconds
+worker 10 buried after 1 seconds
+worker 11 buried after 1 seconds
+worker 12 buried after 1 seconds
+worker 13 buried after 1 seconds
+worker 14 buried after 1 seconds
+worker 15 buried after 1 seconds
+worker 16 buried after 1 seconds
+worker 17 buried after 1 seconds
+worker 18 buried after 1 seconds
+worker 19 buried after 1 seconds
+worker 20 buried after 1 seconds
+worker 21 buried after 1 seconds
+worker 22 buried after 1 seconds
+worker 23 buried after 1 seconds
+worker 24 buried after 1 seconds
+worker 25 buried after 1 seconds
+worker 26 buried after 1 seconds
+worker 27 buried after 1 seconds
+worker 28 buried after 1 seconds
+worker 29 buried after 1 seconds
+worker 30 buried after 1 seconds
+worker 31 buried after 1 seconds
+worker 32 buried after 1 seconds
+worker 33 buried after 1 seconds
+worker 34 buried after 1 seconds
+worker 35 buried after 1 seconds
+worker 36 buried after 1 seconds
+worker 37 buried after 1 seconds
+worker 38 buried after 1 seconds
+worker 39 buried after 1 seconds
+worker 40 buried after 1 seconds
+worker 41 buried after 1 seconds
+worker 42 buried after 1 seconds
+worker 43 buried after 1 seconds
+worker 44 buried after 1 seconds
+worker 45 buried after 1 seconds
+worker 46 buried after 1 seconds
+worker 47 buried after 1 seconds
+worker 48 buried after 1 seconds
+worker 49 buried after 1 seconds
+worker 50 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: pidfile removed.
