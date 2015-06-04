@@ -17,7 +17,8 @@ class Pic(models.Model):
     unqualifiedsum = models.IntegerField(default=0)
     finished = models.BooleanField(db_index=True,default=False)
     docfile = models.FileField(upload_to=pic_path)
-
+    finaljudge = models.BooleanField(db_index=True,default=False)
+    sn = models.CharField(max_length=30,default='')
 
 class User(models.Model):
     id = models.AutoField(primary_key=True)
@@ -36,3 +37,9 @@ class DtVar(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=10,db_index=True,blank=True)
     val = models.DateTimeField(default=datetime.now)
+
+#finished为false的队列
+class Queue(models.Model):
+    id = models.AutoField(primary_key=True)
+    pic = models.ForeignKey(Pic)
+    sdatetime = models.DateTimeField(default=datetime.now)

@@ -10,5 +10,8 @@ urlpatterns = patterns('',
                            r'^setspan/(?P<sy>\d+)/(?P<sm>\d+)/(?P<sd>\d+)/(?P<sh>\d+)/(?P<smin>\d+)/(?P<ssec>\d+)/(?P<ty>\d+)/(?P<tm>\d+)/(?P<td>\d+)/(?P<th>\d+)/(?P<tmin>\d+)/(?P<tsec>\d+)',views.setspan,name='setspan')
                        ,
                        url(r'^init$',views.init,name='init'),
-                       url(r'^getvalidpics$',views.getvalidpics,name='getvalidpics'),
+                       url(r'^validpics$',views.validpics,name='validpics'),
+                       url(r'^ufinpics$',views.ufinpics,name='ufinpics'),
+                       url(r'^ufinpics/(?P<page>\d+)$',views.ufinpics,name='ufinpics'),
+                       url(r'^gopageufin$',views.gopageufin,name='gopageufin'),
                        )
