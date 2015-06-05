@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.core.management.base import BaseCommand, CommandError
 from mysite.models import Pic, User,User_Pic_Rel , DtVar ,Queue
 from datetime import datetime , timedelta
@@ -16,7 +17,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         DELTATIME = timedelta(0, 60)
         specsdatetime = datetime.now() - DELTATIME
-        items = Queue.objects.all().filter(sdatetime__le=specsdatetime)
+        items = Queue.objects.all().filter(sdatetime__lte=specsdatetime)
         for item in items:
             pic = item.pic
             pic.finished = True
