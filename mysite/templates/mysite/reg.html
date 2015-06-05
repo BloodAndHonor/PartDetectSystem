@@ -12,7 +12,7 @@
 
         <form action="{% url 'mysite:reg' %}" method="post" >
             {% csrf_token %}
-          
+                
                 {{ form }}
             </p>
             <p><input type="submit" value="注册" /></p>

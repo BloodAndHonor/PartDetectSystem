@@ -3,7 +3,7 @@
     {% if documents %}
         <ul>
         {% for document in documents %}
-            <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+            <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }} &nbsp;{{ document.sn }}</a></li>
         {% endfor %}
         </ul>
     {% else %}
@@ -13,8 +13,8 @@
         <!-- Upload form. Note enctype attribute! -->
         <form action="{% url 'mysite:upload' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-          
-                {{ form.docfile }}
+                {{form}}
+                
             </p>
             <p><input type="submit" value="Upload" /></p>
         </form>

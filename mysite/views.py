@@ -20,7 +20,7 @@ def init(request):
     DtVar.objects.all().delete()
     DtVar(name='sdate', val=datetime.now()).save()
     DtVar(name='tdate', val=datetime.now()).save()
-    Pic.objects.all().delete()
+    #Pic.objects.all().delete()
     return HttpResponse('OK!')
 # 设置 sdate 和 tdate
 
@@ -42,7 +42,7 @@ def upload(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
-            newdoc = Pic(docfile=request.FILES['docfile'])
+            newdoc = Pic(docfile=request.FILES['docfile'],sn=request.POST['sn'])
             newdoc.save()
             return HttpResponseRedirect(reverse('mysite:upload'))
     form = DocumentForm()
