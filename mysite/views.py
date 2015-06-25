@@ -182,3 +182,19 @@ def ufinpics(request,page=1):
 def gopageufin(request):
     return ufinpics(request,request.POST['pagenum'])
 
+@csrf_exempt
+def finpics(request,page=1):
+    pics = Pic.objects.all().filter(finished=True)
+    paginator=Paginator(pics,25)
+    try:
+        partcontext = paginator.page(page)
+    except PageNotAnInteger:
+        partcontext = paginator.page(1)
+    except EmptyPage:
+        partcontext = paginator.page(paginator.num_pages)
+    c={'items':partcontext}
+    return render_to_response('mysite/finpics.html',c,context_instance=RequestContext(request))
+@csrf_exempt
+def gopagefin(request):
+    return finpics(request,request.POST['pagenum']) 
+

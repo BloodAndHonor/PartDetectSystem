@@ -12,6 +12,8 @@ urlpatterns = patterns('',
                        url(r'init$',views.init,name='init'),
                        url(r'validpics$',views.validpics,name='validpics'),
                        url(r'ufinpics$',views.ufinpics,name='ufinpics'),
+                       url(r'finpics$',views.finpics,name='finpics'),
+                       url(r'finpics/(?P<page>\d+)$',views.finpics,name='finpics'),
                        url(r'ufinpics/(?P<page>\d+)$',views.ufinpics,name='ufinpics'),
                        url(r'gopageufin$',views.gopageufin,name='gopageufin'),
                        )
