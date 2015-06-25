@@ -7,10 +7,6 @@ class DocumentForm(forms.Form):
     docfile = forms.FileField(
         label='Select a file',        
     )
-    sn = forms.CharField(max_length=30,
-        label='sn:'
-        )
-    
 
 
 class RegForm(forms.Form):

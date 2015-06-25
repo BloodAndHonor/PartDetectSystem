@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, get_object_or_404, render_to_response
@@ -20,6 +21,10 @@ def init(request):
     DtVar.objects.all().delete()
     DtVar(name='sdate', val=datetime.now()).save()
     DtVar(name='tdate', val=datetime.now()).save()
+    Pic.objects.all().delete()
+    User.objects.all().delete()
+    User_Pic_Rel.objects.all().delete()
+    Queue.objects.all().delete()
     #Pic.objects.all().delete()
     return HttpResponse('OK!')
 # 设置 sdate 和 tdate
@@ -37,12 +42,13 @@ def setspan(request, sy, sm, sd, sh, smin, ssec, ty, tm, td, th, tmin, tsec):
     return HttpResponse('ok!')
 # 上传文件
 
-
+@csrf_exempt
 def upload(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
-            newdoc = Pic(docfile=request.FILES['docfile'],sn=request.POST['sn'])
+            tsn=request.FILES['docfile'].name
+            newdoc = Pic(docfile=request.FILES['docfile'],sn=tsn)
             newdoc.save()
             return HttpResponseRedirect(reverse('mysite:upload'))
     form = DocumentForm()
@@ -55,7 +61,7 @@ def upload(request):
 
 # 注册用户
 
-
+@csrf_exempt
 def reg(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -79,7 +85,7 @@ def reg(request):
 
 # 用户注册
 
-
+@csrf_exempt
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -115,7 +121,7 @@ def chkcookies(request):
 
 # 得到用户可判定的图片
 
-
+@csrf_exempt
 def validpics(request):
     usr = chkcookies(request)
     if usr == None:
@@ -150,11 +156,17 @@ def validpics(request):
         #id = models.AutoField(primary_key=True)
         #pic = models.ForeignKey(Pic)
         #sdatetime = models.DateTimeField(default=datetime.now)
-        Queue(pic=pic,sdatetime=datetime.now()).save()
+	qres = Queue.objects.all().filter(pic=pic)
+	if len(qres) == 0 :
+	    Queue(pic=pic,sdatetime=datetime.now()).save()
+        else:
+    	    qres[0].sdatetime=datetime.now()
+	    qres[0].save()
         pic.save()
         return HttpResponseRedirect(reverse('mysite:validpics'))
 
 #get unfinished pics
+@csrf_exempt
 def ufinpics(request,page=1):
     pics = Queue.objects.all()
     paginator=Paginator(pics,25)
@@ -166,7 +178,7 @@ def ufinpics(request,page=1):
         partcontext=paginator.page(paginator.num_pages)
     c={'items':partcontext}
     return render_to_response('mysite/ufinpics.html',c,context_instance=RequestContext(request))
-
+@csrf_exempt
 def gopageufin(request):
     return ufinpics(request,request.POST['pagenum'])
 

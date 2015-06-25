@@ -10,8 +10,7 @@
     <br>
     不及格投票数：{{curpic.unqualifiedsum}}
     <br>
-    <form action="{% url "mysite:validpics" %}"  method="POST" role="form" style="text-align:center" >{% csrf_token %}  
-        <input type='hidden' name='picid' value='{{curpic.id}}' />  
+    <form action="{% url "mysite:validpics" %}"  method="POST" role="form" style="text-align:center" >        <input type='hidden' name='picid' value='{{curpic.id}}' />  
     <input href="" class="btn btn-success" type="submit" name="judge" value="合格">
  &nbsp;|&nbsp;<input href="" class="btn btn-warning" type="submit" name="judge" value="不合格" >
 </form>
