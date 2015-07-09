@@ -2,6 +2,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from mysite.models import Pic, User,User_Pic_Rel , DtVar ,Queue
 from datetime import datetime , timedelta
+import urllib2
 
 class Command(BaseCommand):
     args = ''
@@ -12,6 +13,14 @@ class Command(BaseCommand):
 
     def sendsignal(self,pic,sg):
         #需要机械臂的接口
+        QUALIFIEDURL = ""
+        UNQUALIFIEDURL = ""
+        content = ""
+        if sg:
+            content = urllib2.urlopen(QUALIFIEDURL).read()
+        else:
+            content = urllib2.urlopen(UNQUALIFIEDURL).read()
+        print content
         pass
 
     def handle(self, *args, **options):
@@ -21,10 +30,10 @@ class Command(BaseCommand):
         for item in items:
             pic = item.pic
             pic.finished = True
-            if self.isunqualified(pic):
+            if self.isunqualified(pic): #不合格
                 pic.finaljudge = False
                 self.sendsignal(pic,False)
-            else:
+            else: #合格
                 pic.finaljudge = True
                 self.sendsignal(pic,True)
             pic.save()
