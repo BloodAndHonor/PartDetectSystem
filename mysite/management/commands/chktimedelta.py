@@ -13,15 +13,11 @@ class Command(BaseCommand):
 
     def sendsignal(self,pic,sg):
         #需要机械臂的接口
-        QUALIFIEDURL = ""
         UNQUALIFIEDURL = ""
         content = ""
-        if sg:
-            content = urllib2.urlopen(QUALIFIEDURL).read()
-        else:
+        if not sg:
             content = urllib2.urlopen(UNQUALIFIEDURL).read()
-        print content
-        pass
+
 
     def handle(self, *args, **options):
         DELTATIME = timedelta(0, 60)
