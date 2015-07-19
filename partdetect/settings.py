@@ -78,10 +78,15 @@ WSGI_APPLICATION = 'partdetect.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        #数据库名
         'NAME': 'partdetect',
+        #用户名
         'USER': 'root',
+        #密码
         'PASSWORD':'123456',
+        #mysql主机地址
         'HOST': 'localhost',
+        #mysql主机端口
         'PORT' : '3306',
     }
 }
@@ -90,7 +95,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
+#设定时区
 TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
@@ -102,8 +107,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
+#网页静态文件（css,javascript,jpg）的相对目录地址
 STATIC_URL = '/static/'
+#图片上传的绝对目录地址
 MEDIA_ROOT='/var/www/PartDetectSystem/media'
+#图片上传的相对目录地址
 MEDIA_URL = '/media/'
+#网页静态文件 (css,javascript,jpg) 的绝对目录地址
 STATIC_ROOT='/var/www/PartDetectSystem/static'

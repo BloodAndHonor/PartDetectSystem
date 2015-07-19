@@ -10,14 +10,16 @@ from django.template import RequestContext, loader
 from django.forms import ModelForm
 from django.core.context_processors import csrf
 import random
+
 from mysite.forms import DocumentForm, RegForm, LoginForm
 from mysite.models import User_Pic_Rel, User, Pic, DtVar , Queue
-# Create your views here.
+
 from datetime import datetime
-# 初始化 sdate 删除所有图片
+
 
 
 def init(request):
+    #删除数据库所有数据
     DtVar.objects.all().delete()
     DtVar(name='sdate', val=datetime.now()).save()
     DtVar(name='tdate', val=datetime.now()).save()
@@ -25,12 +27,12 @@ def init(request):
     User.objects.all().delete()
     User_Pic_Rel.objects.all().delete()
     Queue.objects.all().delete()
-    #Pic.objects.all().delete()
     return HttpResponse('OK!')
-# 设置 sdate 和 tdate
+#
 
 
 def setspan(request, sy, sm, sd, sh, smin, ssec, ty, tm, td, th, tmin, tsec):
+    #这个没用 可以不看
     sdate = get_object_or_404(DtVar, name='sdate')
     tdate = get_object_or_404(DtVar, name='tdate')
     sdate.val = datetime(
@@ -40,10 +42,12 @@ def setspan(request, sy, sm, sd, sh, smin, ssec, ty, tm, td, th, tmin, tsec):
     sdate.save()
     tdate.save()
     return HttpResponse('ok!')
-# 上传文件
+
 
 @csrf_exempt
 def upload(request):
+    #上传图片
+    #对应的网页模版地址为 mysite/templates/mysite/upload.html
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
@@ -59,10 +63,11 @@ def upload(request):
         context_instance=RequestContext(request)
     )
 
-# 注册用户
 
 @csrf_exempt
 def reg(request):
+    #注册用户
+    #对应的网页模版地址为 mysite/templates/mysite/reg.html
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -83,10 +88,12 @@ def reg(request):
     }
     return render_to_response('mysite/reg.html', c, context_instance=RequestContext(request))
 
-# 用户注册
+
 
 @csrf_exempt
 def login(request):
+    #用户登录
+    #对应的模版地址为 mysite/templates/mysite/login.html
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -107,6 +114,7 @@ def login(request):
 
 
 def chkcookies(request):
+    #检查cookies是否合法
     username = request.session.get('username', None)
     password = request.session.get('password', None)
     if username and password:
@@ -119,10 +127,12 @@ def chkcookies(request):
     else:
         return None
 
-# 得到用户可判定的图片
+
 
 @csrf_exempt
 def validpics(request):
+    #返回当前登陆用户可以进行判定的图片集
+    #对应的模版地址为 mysite/templates/mysite/show.html
     usr = chkcookies(request)
     if usr == None:
         return HttpResponse('请先登录！')
@@ -139,13 +149,11 @@ def validpics(request):
                 'curpic': curpic,
             }
         return render_to_response('mysite/show.html', c, context_instance=RequestContext(request))
-        # return HttpResponse(str(len(pics)))
+
     else:
         opt = request.POST['judge']
         picid = int(request.POST['picid'])
         pic = get_object_or_404(Pic, id=picid)
-        #usr = User.objects.all().filter(username = username).filter(password=password)[0]
-        # return HttpResponse((opt)+' | '+('合格'.decode('utf8')))
         pic.votesum += 1
         if opt == ('合格'.decode('utf8')):
             User_Pic_Rel(pic=pic, usr=usr, unqualified=0).save()            
@@ -153,9 +161,6 @@ def validpics(request):
             pic.unqualifiedsum += 1
             User_Pic_Rel(pic=pic, usr=usr, unqualified=1).save()
             
-        #id = models.AutoField(primary_key=True)
-        #pic = models.ForeignKey(Pic)
-        #sdatetime = models.DateTimeField(default=datetime.now)
 	qres = Queue.objects.all().filter(pic=pic)
 	if len(qres) == 0 :
 	    Queue(pic=pic,sdatetime=datetime.now()).save()
@@ -165,9 +170,11 @@ def validpics(request):
         pic.save()
         return HttpResponseRedirect(reverse('mysite:validpics'))
 
-#get unfinished pics
+
 @csrf_exempt
 def ufinpics(request,page=1):
+    #得到所有未进行最终评判的图片集
+    #对应的模版地址为 mysite/templates/mysite/ufinpics.html
     pics = Queue.objects.all()
     paginator=Paginator(pics,25)
     try:
@@ -184,6 +191,8 @@ def gopageufin(request):
 
 @csrf_exempt
 def finpics(request,page=1):
+    #得到已经进行最终评判的图片集
+    #对应的模版地址为 mysite/templates/mysite/finpics.html
     pics = Pic.objects.all().filter(finished=True)
     paginator=Paginator(pics,25)
     try:
